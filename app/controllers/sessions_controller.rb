@@ -4,7 +4,14 @@ class SessionsController < ApplicationController
     end
 
     post '/login' do
-       
+       user = User.find_by_email(params[:email])
+
+        if user && user.authenticate(params[:password])
+            session[:user_id] = user.id
+            redirect to '/recipe_index'
+        else
+            redirect to '/login'
+        end
     end
 
     post '/logout' do
