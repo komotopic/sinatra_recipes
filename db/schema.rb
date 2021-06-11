@@ -13,16 +13,16 @@
 ActiveRecord::Schema.define(version: 2021_06_10_205810) do
 
   create_table "recipes", force: :cascade do |t|
-    t.text "title"
-    t.text "content"
+    t.string "title"
+    t.string "content"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "user_name"
-    t.text "email"
+    t.string "email"
+    t.string "password_digest"
   end
 
 end
