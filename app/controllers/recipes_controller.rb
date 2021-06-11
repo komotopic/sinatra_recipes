@@ -1,8 +1,8 @@
 class RecipeController < ApplicationController
 
     get '/recipes' do
-       
-        erb :'recipes/recipe_index'
+       @recipes = Recipe.all
+        erb :'recipes/recipe_index.html'
     end
 
     post '/recipes' do

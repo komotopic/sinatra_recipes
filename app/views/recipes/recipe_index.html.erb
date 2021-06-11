@@ -3,7 +3,10 @@
 <form method="POST" action='/logout'>
 <input type="submit" value="Log Out">
 </form>
+  
+    <% @recipes.each do |recipe| %>
+    
+    <li><a href="/recipes/<%=recipe.id%>"><%=recipe.title %></li></a>
+    <%end%>
+   
 
-<% @recipes.each do |recipe| %>
-<a href="/recipes/<%=recipe.id%>"><%=recipe.title %></a>
-<%end%>
