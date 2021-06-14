@@ -2,19 +2,25 @@ class RecipeController < ApplicationController
 
     get '/recipes' do
        @recipes = Recipe.all
-        erb :'recipes/recipe_index.html'
+        erb :'recipes/recipe_index'
     end
 
     post '/recipes' do
         if !is_logged_in?
             redirect to '/login'
         end
+        recipe = Recipe.new(params)
+        recipe.save
+        binding.pry
+        redirect to '/recipes'
     end
 
     get '/recipes/new' do
         if !is_logged_in?
             redirect to '/login'
         end
+
+        erb :'recipes/new'
     end
 
     
@@ -23,6 +29,8 @@ class RecipeController < ApplicationController
         if !is_logged_in?
             redirect to '/login'
         end
+
+        erb :'recipes/show'
     end
 
     get 'recipes/:id/edit' do

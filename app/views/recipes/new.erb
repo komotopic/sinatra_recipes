@@ -1,9 +1,13 @@
 <h1> Create a new recipe </h1>
 
-<form method='POST' action='/recipes'>
+<form method="POST" action="/recipes">
+<label for="title" >Title:</label>
 <input type="text" name="title" id="recipe_title">
-<form method='POST' action='/recipes'>
-<input type="textarea" name="content" id="recipe_content">
+<br>
+<label for="content" >Content:</label>
+<br>
+<textarea name="content" id="recipe_content" rows="15" cols="50">
+</textarea>
 
 <input type="submit" value="Create Recipe">
 </form>

@@ -1,0 +1,23 @@
+<%if is_logged_in?%>
+<h6>Logged in as <%=current_user.email%></h6>
+<a href="/new_log">Not you? Log in with another account</a>
+<br>
+<a href="/logout">Logout</a>
+<br>
+<a href="/recipes/new">Create new recipe</a>
+<%else%>
+<a href="/login">Log in with your account</a>
+<%end%>
+
+</form>
+<br>
+<br>
+<h2>Current Recipes</h2>
+  <ol>
+    <% @recipes.each do |recipe| %>
+    
+    <li><a href="/recipes/<%=recipe.id%>"><%=recipe.title %></li></a>
+    <%end%>
+    </ol>
+   
+
