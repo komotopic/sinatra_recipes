@@ -1,3 +1,7 @@
 <h1><%=@recipe.title%></h1>
 
 <h3> <%= @recipe.content%></h3>
+
+
+<% if @recipe.user == current_user %>
+<a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
