@@ -9,12 +9,13 @@ class UserController < ApplicationController
     post '/sign_up' do
        user = User.new(params)
        if user.email.blank? || user.password.blank?
+        redirect to '/error_sign_up'
 
        elsif  User.find_by(email: params[:email])
         redirect to '/user_exists'
         
        elsif !user.email.include?('@')
-        redirect to '/not_val_email'
+        redirect to '/error_sign_up'
 
        else   
         user.save
@@ -29,8 +30,8 @@ class UserController < ApplicationController
         erb :'users/user_exists'
     end
 
-    get '/not_val_email' do
-        erb :'users/not_val_email'
+    get '/error_sign_up' do
+        erb :'users/error_sign_up'
     end
 
     

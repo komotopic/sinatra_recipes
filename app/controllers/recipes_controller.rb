@@ -31,12 +31,25 @@ class RecipeController < ApplicationController
             redirect to '/login'
         else
             @recipe = Recipe.find(params[:id])
-            if @recipes.user != current_user
+            if @recipe.user != current_user
                 redirect to '/recipes'
             end
             erb :'recipes/edit'
         end
     end
+
+    get '/recipes/:id/delete' do
+        if !is_logged_in?
+            redirect to '/login'
+        else
+            @recipe = Recipe.find(params[:id])
+            if @recipe.user != current_user
+                redirect to '/recipes'
+            end
+            erb :'recipes/delete'
+        end
+    end
+
 
     post '/recipes' do
         if !is_logged_in?
@@ -49,23 +62,45 @@ class RecipeController < ApplicationController
         redirect to '/recipes'
     end
 
-    patch '/recipes/:id' do
+    post '/recipes/:id' do
         if !is_logged_in?
             redirect to '/login'
-        else @recipe = Recipe.find(params[:id])
-            if @recipes.user != current_user
-                redirect to '/recipes'
-            else
-                @recipe.update(params["recipe"])
-                redirect :'recipe/#{@recipe.id}'
-            end
+        else
+        @recipe = Recipe.find(params[:id])
+        redirect to "/recipes/#{@recipe.id}"
         end
     end
 
-    get 'recipes/:id/delete' do
+    patch '/recipes/:id' do
+        if !is_logged_in?
+            redirect to '/login'
+        else
+            @recipe = Recipe.find(params[:id])
+            if @recipe.user != current_user
+                redirect to '/recipes'
+            else
+                
+                @recipe.update(params["recipe"])
+                redirect to "/recipes/#{@recipe.id}"
+            end
+            
+            
+        end
+    end
+
+
+    delete '/recipes/:id' do
         if !is_logged_in?
             redirect to '/login'
         end
+        @recipe = Recipe.find(params[:id])
+        if @recipe.user != current_user
+            redirect to '/recipes'
+        else
+            @recipe.destroy
+            redirect to "/recipes"
+        end
+
     end
 
 
