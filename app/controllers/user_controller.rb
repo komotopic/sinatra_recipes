@@ -19,8 +19,8 @@ class UserController < ApplicationController
 
        else   
         user.save
-        
-        redirect to '/login'
+        session[:user_id] = user.id
+            redirect to '/recipes'
        end
 
 
